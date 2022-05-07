@@ -1,4 +1,4 @@
-#My first workflow on Github
+#Pipelines
 
 [![Deployment to heroku](https://github.com/andyswj/miniProject/actions/workflows/deploy.yaml/badge.svg)](https://github.com/andyswj/miniProject/actions/workflows/deploy.yaml)
 
