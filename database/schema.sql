@@ -18,7 +18,7 @@ CREATE TABLE module_review(
     module_name VARCHAR(256) NOT NULL,
     rating INT,
     comment VARCHAR(256),
-    user_id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
 
     PRIMARY KEY (review_id),
     CONSTRAINT fk_user_id FOREIGN KEY(user_id) REFERENCES user(user_id)
