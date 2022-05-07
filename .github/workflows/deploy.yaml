@@ -10,7 +10,7 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12 
         with:
           heroku_api_key: ${{ secrets.heroku_api_key }}
-          heroku_app_name: portfolio-tracker-arian
+          heroku_app_name: miniprojectvttp
           heroku_email: ${{ secrets.heroku_email }}
         env:
           HD_SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
