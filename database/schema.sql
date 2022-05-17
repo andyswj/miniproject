@@ -17,7 +17,8 @@ CREATE TABLE module_review(
     review_id INT NOT NULL AUTO_INCREMENT,
     module_name VARCHAR(256) NOT NULL,
     rating INT,
-    comment VARCHAR(256),
+    comment VARCHAR(512),
+    review_date date default (current_date),
     user_id INT NOT NULL,
 
     PRIMARY KEY (review_id),
