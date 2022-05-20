@@ -54,5 +54,40 @@ public class ReviewService {
 
         return reviewPage;
     }
+
+    public Page<Review> findPaginatedByUserId(PageRequest pageRequest, String username) {
+
+        int userId = (Integer) userRepo.selectUserIdByUsername(username);
+        
+        List<Review> reviews = reviewRepo.getReviewByUserId(userId);
+
+        int currentPage = pageRequest.getPageNumber();
+        int pageSize = pageRequest.getPageSize();
+
+        int startItem = currentPage * pageSize;
+
+        List<Review> list;
+
+        if(reviews.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, reviews.size());
+            list = reviews.subList(startItem, toIndex);
+        }
+
+        Page<Review> reviewPage = new PageImpl<Review>(list, PageRequest.of(currentPage, pageSize), reviews.size());
+
+        return reviewPage;
+    }
+
+    public Page<Review> deleteReview(int reviewId, String username) {
+        int userId = (Integer) userRepo.selectUserIdByUsername(username);
+
+        reviewRepo.deleteReviewByUserIdAndReviewId(userId, reviewId);
+
+        Page<Review> reviewPage = findPaginatedByUserId(PageRequest.of(1 - 1, 2), username);
+
+        return reviewPage;
+    }
     
 }

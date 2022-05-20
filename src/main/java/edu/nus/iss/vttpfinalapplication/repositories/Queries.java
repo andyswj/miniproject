@@ -9,4 +9,5 @@ public interface Queries {
     public static final String SQL_CREATE_REVIEW = "insert into module_review (module_name, comment, rating, user_id) values (?, ?, ?, ?)";
     public static final String SQL_GET_REVIEW_BY_MODNAME = "select * from module_review where module_name = ?";
     public static final String SQL_GET_REVIEW_BY_USERID = "select * from module_review where user_id = ?";
+    public static final String SQL_DELETE_REVIEW_BYUSERID_REVIEWID = "delete from module_review where user_id = ? and review_id = ?";
 }

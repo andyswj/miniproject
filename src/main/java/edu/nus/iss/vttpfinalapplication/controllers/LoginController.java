@@ -5,6 +5,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +47,34 @@ public class LoginController {
         List<String> mods = moduleSvc.getISSModule();
 
         model.addAttribute("mods", mods);
+        model.addAttribute("status0", 0);
         model.addAttribute("status", 0);
+        model.addAttribute("status1", 0);
         return "index";
     }
 
     @GetMapping(path="/create")
     public String create() {
         return "create";
+    }
+
+    @GetMapping(path="/login")
+    public String login(Model model) {
+        model.addAttribute("status0", 1);
+        model.addAttribute("status", 0);
+        model.addAttribute("status1", 0);
+        return "index";
+    }
+
+    @GetMapping(path="/view")
+    public String view(Model model) {
+        List<String> mods = moduleSvc.getISSModule();
+
+        model.addAttribute("mods", mods);
+        model.addAttribute("status", 1);
+        model.addAttribute("status0", 0);
+        model.addAttribute("status1", 0);
+        return "index";
     }
 
     @PostMapping(path="/createaccount")
@@ -65,12 +89,13 @@ public class LoginController {
 
         if (result == 1) {
             session.setAttribute("username", username); //from controller to controller to pass data
-            final ModelAndView mav = new ModelAndView("redirect:/protected/review");
+            final ModelAndView mav = new ModelAndView("redirect:/protected/review");       
             // mav.addObject("username", username);
             // mav.setStatus(HttpStatus.OK);
             return mav;
         } else{
             final ModelAndView mav1 = new ModelAndView("error");
+            mav1.addObject("errorMsg", "Username is not available, please try with other username. Thank you");
             mav1.setStatus(HttpStatus.BAD_REQUEST);
             return mav1;
         }
@@ -95,6 +120,7 @@ public class LoginController {
             return mav;
         } else{
             final ModelAndView mav1 = new ModelAndView("error");
+            mav1.addObject("errorMsg", "Wrong username or password. Please try again. Thank you.");
             mav1.setStatus(HttpStatus.BAD_REQUEST);
             return mav1;
         }
@@ -128,7 +154,26 @@ public class LoginController {
 
         model.addAttribute("mods", mods);
         model.addAttribute("moduleName", moduleName);
+        model.addAttribute("status1", 1);
         model.addAttribute("status", 1);
+
+        return "index";
+    }
+
+    @GetMapping("/logout")
+    public String getLogout(HttpSession session, HttpServletRequest req, HttpServletResponse resp) {
+        session.invalidate();
+
+        Cookie[] cookies = req.getCookies();
+
+        if (cookies != null)
+        for (Cookie cookie : cookies) {
+            // System.out.println("cookie value: " + cookie.getValue());
+            cookie.setValue("");
+            cookie.setPath("/");
+            cookie.setMaxAge(0);
+            resp.addCookie(cookie);
+        }
 
         return "index";
     }

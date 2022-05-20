@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Review Page</title>
+    <title>Mini Project</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script> -->
@@ -17,58 +17,93 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="row ms-5">
-        <h2>Welcome <span th:text="${username}"></span>,</h2>
-    </div>
-    <form action="#" th:action="@{/protected/add}" method="post">
-        <div class="row ms-5 form-group col-lg-5">
-            <select class="dropdown-toggle" id="from" name="module">
-            <option value="" selected disabled>Select ISS module/course for review</option>
-            <option th:each="x : ${mods}" th:value="${x}" th:text="${x}"></option>
-            </select>
-        </div>
-        &nbsp;
-        <div class="row ms-5 form-group col-lg-5">
-            <textarea rows="4" cols="50" name="comment" required>Write a review for the module/course</textarea>
-        </div>
-        &nbsp;
-        <div class="ms-5 ">
-            <span>Rating for module/course: </span>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault1" value="1">
-                <label class="form-check-label" for="flexRadioDefault1">
-                  1
-                </label>
-              </div>
+    <div th:insert="~{/index.html :: copyh}"></div>
+      <div align ="center">
+        <form action="#" th:action="@{/protected/add}" method="post">
+          <div class="row ms-5 form-group col-lg-5" style="text-align: center;">
+              <select class="dropdown-toggle" id="from" name="module">
+              <option value="" selected disabled>Select ISS module/course for review</option>
+              <option th:each="x : ${mods}" th:value="${x}" th:text="${x}"></option>
+              </select>
+          </div>
+          &nbsp;
+          <div class="row ms-5 form-group col-lg-5">
+              <textarea rows="4" cols="50" name="comment" placeholder="Write a review for the module/course" required></textarea>
+          </div>
+          &nbsp;
+          <div class="ms-5 ">
+              <span>Rating for module/course: </span>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault2" value="2">
-                <label class="form-check-label" for="flexRadioDefault2">
-                  2
-                </label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault2" value="3">
-                <label class="form-check-label" for="flexRadioDefault2">
-                  3
-                </label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault2" value="4">
-                <label class="form-check-label" for="flexRadioDefault2">
-                  4
-                </label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault2" value="5">
-                <label class="form-check-label" for="flexRadioDefault2">
-                  5
-                </label>
-              </div>
-        </div>
-        &nbsp;
-        <div class="row ms-5 form-group col-lg-5">
-            <button type="submit" class="btn btn-primary">Add review</button>
-        </div>
-    </form>
+                  <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault1" value="1">
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    1
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault2" value="2">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    2
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault2" value="3">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    3
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault2" value="4">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    4
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="rating" id="flexRadioDefault2" value="5">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    5
+                  </label>
+                </div>
+          </div>
+          &nbsp;
+          <div class="row ms-5 form-group col-lg-5">
+              <button type="submit" class="btn btn-primary">Add review</button>
+          </div>
+       </form>
+      </div>
+
+    <div class="row ms-5 mt-3">
+      <table>
+          <thead>
+              <tr>
+                  <th>Date</th>
+                  <th>Module</th>
+                  <th>Comment</th>
+                  <th>Rating</th>
+                  <th></th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr th:each="review, iStat : ${reviewPage.content}"
+                  th:style="${iStat.odd}? 'font-weight: bold;'"
+                  th:alt-title="${iStat.even}? 'even' : 'odd'">
+                  <td th:text="${review.reviewDate}"></td>
+                  <td th:text="${review.moduleName}"></td>
+                  <td th:text="${review.comment}"></textarea></td>
+                  <td th:text="${review.rating}"></td>
+                  <td><a class="btn btn-danger" href="#" th:href="@{/protected/delete(reviewId=${review.reviewId})}" role="button">Delete</a></td>
+                  <td></td>
+              </tr>
+          </tbody>
+      </table>
+      <div th:if="${reviewPage.totalPages > 0}" class="  pagination" th:each="pageNumber : ${pageNumbers}">
+          <a th:href="@{/protected/review(page=${pageNumber})}"
+              th:text=${pageNumber}
+              th:class="${pageNumber==reviewPage.number + 1} ? active"></a>
+      </div>
+  </div>
+  <footer class="ms-2">
+		<small><b th:text="${#execInfo.now.time}"></b></small><small>&copy;NUS ISS Module Review Page</small>
+	</footer>
 </body>
 </html>

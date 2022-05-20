@@ -3,6 +3,7 @@ package edu.nus.iss.vttpfinalapplication.models;
 import java.util.Date;
 
 public class Review {
+    private int reviewId;
     private String moduleName;
     private int rating;
     private String comment;
@@ -50,6 +51,14 @@ public class Review {
 
     public void setReviewDate(Date reviewDate) {
         this.reviewDate = reviewDate;
+    }
+
+    public int getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
     }
 
     @Override

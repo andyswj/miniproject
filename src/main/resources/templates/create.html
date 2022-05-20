@@ -17,17 +17,18 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="row ms-5 mt-3">
-        <h2>Login Page</h2>
+    <div th:insert="~{/index.html :: copyh}"></div>
+    <div class="row ms-5 mt-3" align ="center">
+        <h2>Create Account</h2>
     </div>
-    <div class="row">
+    <div class="row" align ="center">
         <form action="/autheticate" th:action="@{/createaccount}" method="post">
             <div class="row ms-5 form-group col-lg-5">
-                <label for="username" class="form-label">Username:</label>
+                <label for="username" class="form-label" style="text-align: left;">Username:</label>
                 <input type="text" class="form-control" name="username" required>
             </div>
             <div class="row ms-5 form-group col-lg-5">
-                <label for="password" class="form-label">Password:</label>
+                <label for="password" class="form-label" style="text-align: left;">Password:</label>
                 <input type="password" class="form-control" name="password" required>
             </div>
             &nbsp;
@@ -35,6 +36,9 @@
                 <button type="submit" class="btn btn-primary">Create Account</button>
             </div>
         </form>
-    </div>  
+    </div> 
+    <footer class="ms-2">
+		<small><b th:text="${#execInfo.now.time}"></b></small><small>&copy;NUS ISS Module Review Page</small>
+	</footer>
 </body>
 </html>

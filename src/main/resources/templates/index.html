@@ -17,17 +17,34 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="row ms-5 mt-3">
-        <h2>Login Page</h2>
-    </div>
-    <div class="row">
+    <header th:fragment="copyh" class="ms-2 mt-2">
+		<table>
+			<tr>
+                <td width="120px" height="50px"><img width="100%" th:src="@{/images/iss.png}" /></td>
+				<td style="padding-left: 30px;"><h1>NUS ISS Module Review</h1></td>
+			</tr>
+		</table>
+		<br>
+
+		<div>
+			<a class="btn btn-outline-info head1" href="#" th:href="@{/login}" th:if="${username == null}">Login/Register account</a> 
+            <a class="btn btn-outline-info head1" href="#" th:href="@{/view}" th:if="${username == null}">View module reviews</a>
+            <div th:if="${username != null}" class="ms-5">
+                <h4 style="float: left;">Welcome <span th:text="${session.username}"></span></h4>
+                &nbsp; <a class="btn btn-outline-dark" th:href="@{/logout}">Logout</a>
+            </div>
+		</div>
+        &nbsp;
+	</header>
+
+    <div class="row inset" th:if="${status0 == 1}" align ="center">
         <form action="/autheticate" th:action="@{/autheticate}" method="post">
-            <div class="row ms-5 form-group col-lg-5">
-                <label for="username" class="form-label">Username:</label>
+            <div class="row ms-5 form-group col-lg-5" align ="center">
+                <label for="username" class="form-label" style="text-align: left;">Username:</label>
                 <input type="text" class="form-control" name="username" required>
             </div>
             <div class="row ms-5 form-group col-lg-5">
-                <label for="password" class="form-label">Password:</label>
+                <label for="password" class="form-label" style="text-align: left;">Password:</label>
                 <input type="password" class="form-control" name="password" required>
             </div>
             &nbsp;
@@ -39,7 +56,7 @@
             <a th:href="@{/create}">Create an account</a>
         </div>
     </div>
-    <div class="row">
+    <div class="row" th:if="${status == 1}">
         <div class="row ms-5 mt-3">
             <h2>NUS ISS Module Review Page</h2>
         </div>
@@ -56,11 +73,11 @@
             </div>
         </form>
     </div>
-    <div class="row ms-5 mt-3">
+    <div class="row ms-5 mt-3" th:if="${status1 == 1}">
         <h3 th:text="${moduleName}"></h3>
     </div>
     &nbsp;
-    <div class="row ms-5 mt-3" th:if="${status == 1}">
+    <div class="row ms-5 mt-3" th:if="${status1 == 1}">
         <table>
             <thead>
                 <tr>
@@ -79,11 +96,14 @@
                 </tr>
             </tbody>
         </table>
-        <div th:if="${reviewPage.totalPages > 0}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+        <div th:if="${reviewPage.totalPages > 0}" class="  pagination" th:each="pageNumber : ${pageNumbers}">
             <a th:href="@{/list(page=${pageNumber}, module=${moduleName})}"
                 th:text=${pageNumber}
                 th:class="${pageNumber==reviewPage.number + 1} ? active"></a>
         </div>
     </div>
+    <footer class="ms-2">
+		<small><b th:text="${#execInfo.now.time}"></b></small><small>&copy;NUS ISS Module Review Page</small>
+	</footer>
 </body> 
 </html>

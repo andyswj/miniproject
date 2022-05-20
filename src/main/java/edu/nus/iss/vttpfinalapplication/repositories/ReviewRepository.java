@@ -46,11 +46,43 @@ public class ReviewRepository {
             review.setComment(rs.getString("comment"));
             review.setRating(rs.getInt("rating"));
             review.setReviewDate(rs.getDate("review_date"));
+            review.setReviewId(rs.getInt("review_id"));
 
             reviews.add(review);
         }
 
         return reviews;
+    }
+
+    public List<Review> getReviewByUserId(int userId) {
+
+        List<Review> reviews = new LinkedList<>();
+        
+        final SqlRowSet rs = template.queryForRowSet(
+            SQL_GET_REVIEW_BY_USERID,
+            userId
+        );
+
+        while(rs.next()) {
+            Review review = new Review();
+            review.setModuleName(rs.getString("module_name"));
+            review.setComment(rs.getString("comment"));
+            review.setRating(rs.getInt("rating"));
+            review.setReviewDate(rs.getDate("review_date"));
+            review.setReviewId(rs.getInt("review_id"));
+
+            reviews.add(review);
+        }
+
+        return reviews;
+    }
+
+    public void deleteReviewByUserIdAndReviewId(int userId, int reviewId) {
+        final int count = template.update(
+            SQL_DELETE_REVIEW_BYUSERID_REVIEWID,
+            userId,
+            reviewId
+        );
     }
 }
 
