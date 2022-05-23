@@ -57,27 +57,23 @@
         </div>
     </div>
     <div class="row" th:if="${status == 1}">
-        <div class="row ms-5 mt-3">
-            <h2>NUS ISS Module Review Page</h2>
-        </div>
         <form action="/list" th:action="@{/list}" method="get">
-            <div class="row ms-5 form-group col-lg-5">
+            <div class="row ms-2 form-group col-lg-5">
                 <select class="dropdown-toggle" id="from" th:name="module">
                 <option value="" selected disabled>Select ISS module/course for review</option>
                 <option th:each="x : ${mods}" th:value="${x}" th:text="${x}"></option>
                 </select>
             </div>
             &nbsp;
-            <div class="row ms-5 form-group col-lg-5">
+            <div class="row ms-2 form-group col-lg-5">
                 <button type="submit" class="btn btn-primary">Search</button>
             </div>
         </form>
     </div>
-    <div class="row ms-5 mt-3" th:if="${status1 == 1}">
+    <div class="row ms-2 mt-3" th:if="${status1 == 1}">
         <h3 th:text="${moduleName}"></h3>
     </div>
-    &nbsp;
-    <div class="row ms-5 mt-3" th:if="${status1 == 1}">
+    <div class="row ms-2 mt-3" th:if="${status1 == 1}">
         <table>
             <thead>
                 <tr>
@@ -102,7 +98,7 @@
                 th:class="${pageNumber==reviewPage.number + 1} ? active"></a>
         </div>
     </div>
-    <footer class="ms-2">
+    <footer class="ms-2" style="position: fixed; bottom: 0px;">
 		<small><b th:text="${#execInfo.now.time}"></b></small><small>&copy;NUS ISS Module Review Page</small>
 	</footer>
 </body> 
