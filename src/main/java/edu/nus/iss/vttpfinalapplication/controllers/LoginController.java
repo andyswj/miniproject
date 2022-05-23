@@ -55,7 +55,7 @@ public class LoginController {
 
     @GetMapping(path="/create")
     public String create() {
-        return "index";
+        return "create";
     }
 
     @GetMapping(path="/login")
