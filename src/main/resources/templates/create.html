@@ -18,6 +18,25 @@
 </head>
 <body>
     <!-- <div th:insert="~{/index.html :: copyh}"></div> -->
+    <header th:fragment="copyh" class="ms-2 mt-2">
+		<table>
+			<tr>
+                <td width="120px" height="50px"><img width="100%" th:src="@{/images/iss.png}" /></td>
+				<td style="padding-left: 30px;"><h1>NUS ISS Module Review</h1></td>
+			</tr>
+		</table>
+		<br>
+
+		<div>
+			<a class="btn btn-outline-info head1" href="#" th:href="@{/login}" th:if="${username == null}">Login/Register account</a> 
+            <a class="btn btn-outline-info head1" href="#" th:href="@{/view}" th:if="${username == null}">View module reviews</a>
+            <div th:if="${username != null}" class="ms-5">
+                <h4 style="float: left;">Welcome <span th:text="${session.username}"></span></h4>
+                &nbsp; <a class="btn btn-outline-dark" th:href="@{/logout}">Logout</a>
+            </div>
+		</div>
+        &nbsp;
+	</header>
     <div class="row ms-5 mt-3" align ="center">
         <h2>Create Account</h2>
     </div>
