@@ -82,27 +82,7 @@ class VttpfinalapplicationApplicationTests {
 		ModelAndView mav = loginCon.loginAuthetication(map, session);
 		assertTrue(mav.getViewName() == "error");
 	}
-
-	// @Test
-	// void shouldNotLog() {
-
-	// 	MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-	// 	map.add("username", "1234");
-	// 	map.add("password", "test");
-
-	// 	RequestBuilder req = MockMvcRequestBuilders
-	// 		.post("/autheticate")
-	// 		.contentType(MediaType.APPLICATION_FORM_URLENCODED)
-	// 		.content(map.toString());
-			
-
-	// 	try {
-	// 		this.mockMvc.perform(req).andExpect(content().string(containsString("Wrong username or password")));
-	// 	} catch(Exception ex) {
-	// 		fail("Did not return error page");
-	// 	}
-	// }
-
+	
 	@Test
 	@Order(2)
 	public void checkUser() {
