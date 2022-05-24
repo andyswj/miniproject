@@ -1,10 +1,12 @@
 package edu.nus.iss.vttpfinalapplication.repositories;
 
-import static edu.nus.iss.vttpfinalapplication.repositories.Queries.*;
+import static edu.nus.iss.vttpfinalapplication.repositories.Queries.SQL_CREATE_REVIEW;
+import static edu.nus.iss.vttpfinalapplication.repositories.Queries.SQL_DELETE_REVIEW_BYUSERID_REVIEWID;
+import static edu.nus.iss.vttpfinalapplication.repositories.Queries.SQL_GET_REVIEW_BY_MODNAME;
+import static edu.nus.iss.vttpfinalapplication.repositories.Queries.SQL_GET_REVIEW_BY_USERID;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
