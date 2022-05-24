@@ -73,8 +73,8 @@
     <div class="row ms-2 mt-3" th:if="${status1 == 1}">
         <h3 th:text="${moduleName}"></h3>
     </div>
-    <div class="row ms-2 mt-3" th:if="${status1 == 1}">
-        <table>
+    <div class="row ms-2 mt-3 me-2" th:if="${status1 == 1}">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Date</th>
@@ -83,20 +83,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="review, iStat : ${reviewPage.content}"
-                    th:style="${iStat.odd}? 'font-weight: bold;'"
-                    th:alt-title="${iStat.even}? 'even' : 'odd'">
+                <tr th:each="review, iStat : ${reviewPage.content}">
                     <td th:text="${review.reviewDate}"></td>
                     <td th:text="${review.comment}"></td>
                     <td th:text="${review.rating}"></td>
                 </tr>
             </tbody>
         </table>
-        <div th:if="${reviewPage.totalPages > 0}" class="  pagination" th:each="pageNumber : ${pageNumbers}">
-            <a th:href="@{/list(page=${pageNumber}, module=${moduleName})}"
-                th:text=${pageNumber}
-                th:class="${pageNumber==reviewPage.number + 1} ? active"></a>
-        </div>
+        <ul class="pagination">
+            <li th:if="${reviewPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+              <a class="page-link"
+              th:href="@{/list(page=${pageNumber}, module=${moduleName})}"
+                th:text=${pageNumber}></a>
+            </li>	
+        </ul>
     </div>
     <footer class="ms-2" style="position: fixed; bottom: 0px;">
 		<small><b th:text="${#execInfo.now.time}"></b></small><small>&copy;NUS ISS Module Review Page</small>

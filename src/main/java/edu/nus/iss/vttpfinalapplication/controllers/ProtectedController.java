@@ -42,9 +42,9 @@ public class ProtectedController {
 
         model.addAttribute("reviewPage", reviewPage);
 
-        // for(Review review : reviewPage.getContent()) {
-        //     System.out.println(review.getComment());
-        // }
+        for(Review review : reviewPage.getContent()) {
+            System.out.println(review.getComment());
+        }
 
         int totalPages = reviewPage.getTotalPages();
         if(totalPages > 0) {

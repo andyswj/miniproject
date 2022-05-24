@@ -23,12 +23,14 @@ public class ReviewService {
     @Autowired
     UserRepository userRepo;
 
-    public void addReview(Review review, String username) {
+    public int addReview(Review review, String username) {
 
         // System.out.println("username: " + username);
         review.setUserId(userRepo.selectUserIdByUsername(username));
 
         reviewRepo.addReview(review);
+
+        return 1;
 
     }
 

@@ -47,7 +47,8 @@ public class LoginService {
 
     public int createUserWithDB(String username, String hashPassword) {
         if(!userRepo.selectUserByUsername(username)) {
-            return userRepo.createUser(username, hashPassword);
+            userRepo.createUser(username, hashPassword);
+            return 1;
         } else {
             return 0;
         }
